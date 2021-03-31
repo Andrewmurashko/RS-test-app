@@ -1,10 +1,11 @@
 # RS-test-app
-### Deploy:
-https://rs-test-app-hospital.herokuapp.com/
+### [Task](https://docs.google.com/document/d/1XN3fuwB0gUvIjAYUXIgKDV3HFcZSGHH1/edit)
+
+### [Deploy](https://rs-test-app-hospital.herokuapp.com/)
 
 ### Stack:
 
-- ReactJS + хуки
+- ReactJS(hooks)
 - React Router
 - Redux
 - Redux thunk
