@@ -1,14 +1,14 @@
 # RS-test-app
 
-Stack:
+### Stack:
 
-ReactJS + хуки
-React Router
-Redux
-Redux thunk
-classnames
+- ReactJS + хуки
+- React Router
+- Redux
+- Redux thunk
+- classnames
 
-ToStart:
+### ToStart:
 
-npm i
-npm start
+- npm i
+- npm start
