@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { fetchWorkLog } from '../redux/actions/workLog';
-import { getBreakers, prepareBreakers } from '../utils/employeeBreakers';
+import { getBreakers, prepareBreakers } from '../utils/getEmployeeBreakers';
 import Button from '../components/Button';
 
 import { makeStyles } from '@material-ui/core/styles';
@@ -23,7 +23,7 @@ const useStyles = makeStyles({
 
 export default function EmployeeTable() {
   const classes = useStyles();
-  const { workLog } = useSelector(({ workLogState }) => workLogState);
+  const { workLog, isLoaded } = useSelector(({ workLogState }) => workLogState);
   const [breakersData, setBreakersData] = React.useState([]);
   const [breakesId, setBreakesId] = React.useState([]);
   const dispatch = useDispatch();
@@ -46,7 +46,7 @@ export default function EmployeeTable() {
     }
   };
 
-  return (
+  return isLoaded ? (
     <>
       <TableContainer component={Paper}>
         <Table className={classes.table} size="small" aria-label="a dense table">
@@ -95,5 +95,7 @@ export default function EmployeeTable() {
         <span>Вернуться назад</span>
       </Link>
     </>
+  ) : (
+    <div>Загрузка</div>
   );
 }

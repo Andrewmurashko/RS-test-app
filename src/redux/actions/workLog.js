@@ -6,10 +6,7 @@ export const setLoaded = (payload) => ({
 });
 
 export const fetchWorkLog = () => (dispatch) => {
-  dispatch({
-    type: 'SET_LOADED',
-    payload: false,
-  });
+  dispatch(setLoaded(false));
   getWorklog().then((res) => dispatch(setWorkLog(res)));
 };
 

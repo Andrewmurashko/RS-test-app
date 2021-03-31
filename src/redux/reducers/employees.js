@@ -18,7 +18,7 @@ const employees = (state = initialState, action) => {
         isLoaded: true,
       };
     }
-    case 'SET_LOADED':
+    case 'SET_LOADED_EMPLOYEES':
       return {
         ...state,
         isLoaded: action.payload,

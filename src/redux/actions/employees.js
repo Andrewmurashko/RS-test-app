@@ -1,15 +1,12 @@
 import { getEmployees } from '../../db/api';
 
-export const setLoaded = (payload) => ({
-  type: 'SET_LOADED',
+export const setLoadedEmployees = (payload) => ({
+  type: 'SET_LOADED_EMPLOYEES',
   payload,
 });
 
 export const fetchEmployees = () => (dispatch) => {
-  dispatch({
-    type: 'SET_LOADED',
-    payload: false,
-  });
+  dispatch(setLoadedEmployees(false));
   getEmployees().then((res) => dispatch(setEmployees(res)));
 };
 

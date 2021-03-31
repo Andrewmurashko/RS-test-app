@@ -16,7 +16,6 @@ export function getBreakers(data) {
   let counter = 6;
   let dataIndex = 0;
   let breakers = [];
-  
   while (dataIndex <= data.length - 1) {
     let currentEmployee = data[dataIndex];
 
