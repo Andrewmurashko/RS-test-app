@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
+import classNames from 'classnames';
 import { fetchWorkLog } from '../redux/actions/workLog';
 import { getBreakers, prepareBreakers } from '../utils/getEmployeeBreakers';
 import Button from '../components/Button';
@@ -21,29 +22,27 @@ const useStyles = makeStyles({
   },
 });
 
-export default function EmployeeTable() {
+export default function Employee() {
   const classes = useStyles();
   const { workLog, isLoaded } = useSelector(({ workLogState }) => workLogState);
-  const [breakersData, setBreakersData] = React.useState([]);
+  const [digitWorkLog, setDigitWorkLog] = React.useState([]);
   const [breakesId, setBreakesId] = React.useState([]);
   const dispatch = useDispatch();
 
   React.useEffect(() => {
-    if (breakersData.length) {
-      const breakesId = getBreakers(breakersData);
+    if (digitWorkLog.length) {
+      const breakesId = getBreakers(digitWorkLog);
       setBreakesId(breakesId);
     } else {
       dispatch(fetchWorkLog());
-      prepareBreakers(setBreakersData);
+      prepareBreakers(setDigitWorkLog);
     }
-  }, [breakersData]);
+  }, [digitWorkLog]);
 
   const onClickOmon = () => {
-    if (window.confirm('Вы действительно хотите стать ЯБатькой?')) {
-      alert('Потрачено...');
-    } else {
-      alert('Жыве Беларусь!');
-    }
+    window.confirm('Вы действительно хотите стать ЯБатькой?')
+      ? alert('Потрачено...')
+      : alert('Жыве Беларусь!');
   };
 
   return isLoaded ? (
@@ -59,7 +58,7 @@ export default function EmployeeTable() {
           </TableHead>
           <TableBody>
             {workLog.map((row, index) => (
-              <TableRow key={index} className={breakesId.includes(row.id) && 'breaked'}>
+              <TableRow key={index} className={classNames({ breaked: breakesId.includes(row.id) })}>
                 <TableCell>{row.from}</TableCell>
                 <TableCell align="left">{row.to}</TableCell>
                 <TableCell align="left">

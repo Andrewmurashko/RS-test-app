@@ -1,7 +1,7 @@
 import React from 'react';
 import { Route } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
-import { Main, EmployeeTable } from './pages';
+import { Main, Employee } from './pages';
 import { fetchEmployees } from './redux/actions/employees';
 
 function App() {
@@ -13,11 +13,12 @@ function App() {
 
   return (
     <div className="content">
-        <h2 className="content__title">Таблица проверки соблюдения внутреннего распорядка больницы</h2>
-
+      <h2 className="content__title">
+        Таблица проверки соблюдения внутреннего распорядка больницы
+      </h2>
       <div className="wrapper">
         <Route exact path="/" component={Main}></Route>
-        <Route exact path="/employee/:id" component={EmployeeTable}></Route>
+        <Route exact path="/employee/:id" component={Employee}></Route>
       </div>
     </div>
   );
