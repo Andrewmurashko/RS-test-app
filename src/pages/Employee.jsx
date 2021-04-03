@@ -58,7 +58,7 @@ export default function Employee() {
           </TableHead>
           <TableBody>
             {workLog.map((row, index) => (
-              <TableRow key={index} className={classNames({ breaked: breakesId.includes(row.id) })}>
+              <TableRow key={index} className={classNames({ "breaked": breakesId.includes(row.id) })}>
                 <TableCell>{row.from}</TableCell>
                 <TableCell align="left">{row.to}</TableCell>
                 <TableCell align="left">

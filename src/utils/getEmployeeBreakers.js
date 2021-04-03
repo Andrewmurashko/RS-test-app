@@ -8,28 +8,44 @@ export async function prepareBreakers(setDigitData) {
     to: new Date(el.to).getTime(),
   }));
   const sortedWorkLog = workLogWithNumDate.sort((el1, el2) => el1.from - el2.from);
+  console.log(sortedWorkLog);
   setDigitData(sortedWorkLog);
 }
 
 export function getBreakers(data) {
-  let presentEmployees = 6;
-  let dataIndex = 0;
   let breakers = [];
-  while (dataIndex <= data.length - 1) {
-    let currentEmployee = data[dataIndex];
-    if (
-      data.filter((el) => el.id !== currentEmployee.id && el.from < currentEmployee.from < el.to)
-    ) {
-      if (presentEmployees < 3) {
-        breakers.push(currentEmployee.id);
-        presentEmployees = 6;
-      } else {
-        presentEmployees -= 1;
-      }
-    } else {
-      presentEmployees -= 1;
+  for (let i = 0; i < data.length; i++) {
+    let absentsTime = data[i];
+    if (isIntervalViolateRules(data, i)) {
+      breakers.push(absentsTime.id);
     }
-    dataIndex += 1;
   }
+  console.log(breakers);
   return breakers;
+}
+
+function calcIntersectionTimeCount(absentTimeIntervals, currentIndex) {
+  const currentInterval = absentTimeIntervals[currentIndex];
+  let counter = 0;
+  for (let i = 0; i < currentIndex; i++) {
+    const interval = absentTimeIntervals[i];
+    if (interval.from <= currentInterval.from && currentInterval.from <= interval.to) {
+      counter++;
+    }
+  }
+  return counter;
+}
+
+function isIntervalViolateRules(absentTimeIntervals, currentIndex) {
+  const currentInterval = absentTimeIntervals[currentIndex];
+  let counter = 0;
+  for (let i = 0; i < currentIndex; i++) {
+    const interval = absentTimeIntervals[i];
+    if (interval.from <= currentInterval.from && currentInterval.from <= interval.to) {
+      if (++counter === 3) {
+        return true;
+      }
+    }
+  }
+  return false;
 }
