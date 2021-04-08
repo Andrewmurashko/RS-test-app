@@ -3,6 +3,7 @@ import { Route } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { Main, Employee } from './pages';
 import { fetchEmployees } from './redux/actions/employees';
+import './utils/forTests';
 
 function App() {
   const dispatch = useDispatch();
